@@ -3,31 +3,31 @@
 cd /vagrant/dev/php
 
 
-for cname in `docker ps --filter="name=ask-php" --format "{{.Names}}" -q -a`
+for cname in `docker ps --filter="name=mama-php" --format "{{.Names}}" -q -a`
 do
-    if [ "$cname" = ask-php ]
+    if [ "$cname" = mama-php ]
     then
         docker stop $cname
         docker rm $cname
     fi
 done
 
-docker build -t ask/php .
+docker build -t mama/php .
 
 docker run \
        -d \
        --restart=always \
        -v /etc/localtime:/etc/localtime:ro \
-       --name ask-php \
-       --hostname ask-php \
+       --name mama-php \
+       --hostname mama-php \
        -p 80:80 \
        -v /vagrant:/vagrant \
-       --link ask-mysql:ask-mysql \
+       --link mama-mysql:mama-mysql \
        -e DESKTOP_NOTIFIER_SERVER_URL=http://192.168.88.1:12345 \
-       ask/php
+       mama/php
 
 docker cp \
        /vagrant/dev/php/desktop-notifier-client \
-       ask-php:/usr/bin/notify-send
+       mama-php:/usr/bin/notify-send
 
-docker exec ask-php /vagrant/dev/php/init-env.sh
+docker exec mama-php /vagrant/dev/php/init-env.sh
