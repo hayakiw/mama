@@ -1,0 +1,14 @@
+@charset "UTF-8";
+/* CSS Document */
+
+.navbar-default {
+    background-color: #2d2d2d;
+    border: none;
+}
+
+.navbar-default .navbar-brand.title {
+    margin-left:10px;
+    font-weight:bold;
+    font-size:1.7em;
+    color:#bcbcbc;
+}
